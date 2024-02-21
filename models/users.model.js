@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaType } = require('mongoose');
 
 const UserSchema = Schema({
     userName:{
@@ -16,6 +16,11 @@ const UserSchema = Schema({
     state:{
         type: Boolean,
         default: true
+    },
+    service:{
+        type: Schema.Types.ObjectId,
+        ref: 'Service',
+        required: [true, 'El servicio es requerido']
     }
 })
 

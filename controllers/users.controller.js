@@ -4,7 +4,7 @@ const User = require('../models/users.model');
 const userGet = async( req = request, res = response) => {
     try {
         const queryParam = { state:true };
-        const usuario = await User.find(queryParam);
+        const usuario = await User.find(queryParam).populate("service");
         res.status(200).json({
             usuario
         })
@@ -18,8 +18,8 @@ const userGet = async( req = request, res = response) => {
 
 const userPost = async( req, res) => {
     try {
-        const { userName, email, password, state } = req.body
-        const data ={userName, email, password, state }
+        const { userName, email, password, state, service } = req.body
+        const data ={userName, email, password, state, service }
 
         const user = new User(data)
         await user.save()
@@ -40,8 +40,8 @@ const userPost = async( req, res) => {
 const userPut = async(req, res) => {
     try {
         const { id } = req.params;
-        const { userName, email, password, state } = req.body
-        const data = { userName, email, password, state } 
+        const { userName, email, password, state, service } = req.body
+        const data = { userName, email, password, state, service } 
 
         const user = await User.findByIdAndUpdate(id, data)
         res.status(200).json({
