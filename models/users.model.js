@@ -14,8 +14,10 @@ const UserSchema = Schema({
         required: [true ,"Se necesita un password"]
     },
     state:{
-        type: Boolean
+        type: Boolean,
+        default: true
     }
 })
 
 module.exports = model('User', UserSchema)
+
