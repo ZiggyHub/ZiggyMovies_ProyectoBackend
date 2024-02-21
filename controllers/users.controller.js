@@ -1,4 +1,4 @@
-const { respone, request } = require('express');
+const { response, request } = require('express');
 const User = require('../models/users.model');
 
 const userGet = async( req = request, res = response) => {
