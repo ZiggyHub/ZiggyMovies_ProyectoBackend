@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const User = require('../models/users.model');
+const { schema } =require('../validators/users.validators')
 
 const userGet = async( req = request, res = response) => {
     try {
@@ -20,6 +21,14 @@ const userPost = async( req, res) => {
     try {
         const { userName, email, password, state, service } = req.body
         const data ={userName, email, password, state, service }
+
+        const { error } = schema.validate(data)
+
+        if(error){
+            return res.status(400).json({
+                message: error.details[0].message
+            })
+        }
 
         const user = new User(data)
         await user.save()

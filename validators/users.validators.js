@@ -13,7 +13,7 @@ const schema = Joi.object().keys({
     password: Joi.string().min(3).max(30).required().messages({
         "string.min": "El campo password debe de tener un minimo de {#limit} caracteres",
     }),
-   state: Joi.boolean()
+   //state: Joi.boolean()
 })
 
-module.exports = (schema)
+module.exports = { schema };
