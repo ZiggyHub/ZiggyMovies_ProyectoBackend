@@ -6,7 +6,7 @@ const dataBaseConnection = async()=>{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        console.log('Ahuevo papirri')
+        console.log('Ahuevo papirri'.cyan.underline)
 
     }catch(error){
         console.log(error);

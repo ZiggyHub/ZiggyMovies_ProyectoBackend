@@ -1,4 +1,6 @@
 const express = require('express');
+const colors = require('colors') 
+const { errorHandler } = require('../middlewares/errorMiddleware')
 const { errors } = require('celebrate');
 const { dataBaseConnection } = require('../db/database');
 
@@ -21,6 +23,8 @@ class Server {
 
     middlewares(){
         this.app.use(express.json())
+        this.app.use(errorHandler)
+        this.app.use(express.urlencoded({extended:false}))
     }
 
     routes(){
@@ -31,7 +35,7 @@ class Server {
 
     listen(){
         this.app.listen(this.port, ()=>{
-            console.log(`escuchando en el puerto ${this.port}`)
+            console.log(`Servidor levantado en el puerto ${this.port} con exito`.cyan.underline)
         })
     }
 }

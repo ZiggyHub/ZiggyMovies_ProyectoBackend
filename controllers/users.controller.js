@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const User = require('../models/users.model');
+
 const { schema } =require('../validators/users.validators')
 
 const userGet = async( req = request, res = response) => {

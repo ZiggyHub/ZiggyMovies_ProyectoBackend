@@ -22,7 +22,10 @@ const UserSchema = Schema({
         ref: 'Service',
         required: [true, 'El servicio es requerido']
     }
-})
+}, {
+    timestamps: true 
+}
+)
 
 module.exports = model('User', UserSchema)
 
