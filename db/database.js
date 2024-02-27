@@ -3,8 +3,8 @@ const mongoose = require("mongoose")
 const dataBaseConnection = async()=>{
     try{
         await mongoose.connect(process.env.MONGODB_CONN_DEV,{
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
+           // useNewUrlParser: true,
+           // useUnifiedTopology: true,
         })
         console.log('Ahuevo papirri'.cyan.underline)
 
