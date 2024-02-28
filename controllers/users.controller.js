@@ -1,9 +1,9 @@
 const { response, request } = require('express');
 const User = require('../models/users.model');
-
+const asyncHandler = require('express-async-handler')
 const { schema } =require('../validators/users.validators')
 
-const userGet = async( req = request, res = response) => {
+const userGet = asyncHandler(async( req = request, res = response) => {
     try {
         const queryParam = { state:true };
         const usuario = await User.find(queryParam).populate("service");
@@ -16,9 +16,9 @@ const userGet = async( req = request, res = response) => {
         })
     }
     res.status(200).json({message:'Usuarios route'})
-}
+})
 
-const userPost = async( req, res) => {
+const userPost = asyncHandler(async( req, res) => {
     try {
         const { userName, email, password, state, service } = req.body
         const data ={userName, email, password, state, service }
@@ -45,9 +45,9 @@ const userPost = async( req, res) => {
             error
         })
     }
-}
+})
 
-const userPut = async(req, res) => {
+const userPut = asyncHandler(async(req, res) => {
     try {
         const { id } = req.params;
         const { userName, email, password, state, service } = req.body
@@ -63,9 +63,9 @@ const userPut = async(req, res) => {
             message: 'Algo salio mal'
         })
     }
-}
+})
 
-const userDel =async(req, res) => {
+const userDel = asyncHandler(async(req, res) => {
 
     try {
         const { id } = req.params
@@ -82,7 +82,9 @@ const userDel =async(req, res) => {
         })
     }
 
-}
+}) 
+
+
 module.exports = { 
     userGet,
     userPost,
