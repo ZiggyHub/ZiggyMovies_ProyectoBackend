@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const User = require('../models/users.model');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler');
 const { schema } =require('../validators/users.validators');
 
@@ -58,6 +59,29 @@ const userPost = asyncHandler(async( req, res) => {
      }
 })
 
+const loginUser = asyncHandler(async (req, res) => {
+    //desestructuramos los datos del body
+    const { email, password } = req.body
+    if (!email || !password) {
+        res.status(400)
+        throw new Error('Faltan datos')
+    }
+
+    //vamos a buscar a ese usuario
+    const user = await User.findOne({ email })
+    if (user && (await bcrypt.compare(password, user.password))) {
+        res.status(200).json({
+            _id: user._id,
+            userName: user.userName,
+            email: user.email,
+            token: generateToken(user._id)
+        })
+    } else {
+        res.status(400)
+        throw new Error('Credenciales Incorrectas')
+    }
+})
+
 const userPut = asyncHandler(async(req, res) => {
     try {
         const { id } = req.params;
@@ -94,11 +118,18 @@ const userDel = asyncHandler(async(req, res) => {
     }
 
 }) 
+//funcion para generar el JWT
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '1d'
+    })
+}
 
 
 module.exports = { 
     userGet,
     userPost,
+    loginUser,
     userPut,
     userDel
 }
