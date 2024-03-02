@@ -10,11 +10,12 @@ const schema = Joi.object().keys({
     email: Joi.string().email().required().messages({
         "stringemail":`El campo debe de tener un formato valido`
     }),
-    password: Joi.string().min(3).max(30).required().messages({
+    password: Joi.string().min(3).max(100).required().messages({
         "string.min": "El campo password debe de tener un minimo de {#limit} caracteres",
+        "string.max":"aqui estaba el pedo we "
     }),
     state: Joi.boolean(),
-    service: Joi.string().required()
+    service: Joi.required()
 })
 
 module.exports = { schema };
