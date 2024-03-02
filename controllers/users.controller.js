@@ -82,6 +82,10 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
+const getUserData = asyncHandler(async (req, res) => {
+    res.json(req.user)
+})
+
 const userPut = asyncHandler(async(req, res) => {
     try {
         const { id } = req.params;
@@ -128,6 +132,7 @@ const generateToken = (id) => {
 
 module.exports = { 
     userGet,
+    getUserData,
     userPost,
     loginUser,
     userPut,

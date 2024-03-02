@@ -1,13 +1,15 @@
 const { Router } = require('express');
-const { userGet, userPost, loginUser, userPut, userDel } = require('../controllers/users.controller');
+const { userGet, userPost, loginUser, userPut, userDel, getUserData } = require('../controllers/users.controller');
 const { celebrateValidator } = require('../middlewares/celebrateValidator');
+const { protect } = require('../middlewares/authMiddleware');
 
 
 const router = Router();
 
 router.post("/", celebrateValidator, userPost);                 //Create
 router.post("/login", loginUser)
-router.get("/", userGet);                                       //Read
+router.get("/", userGet);                
+router.get("/me", protect, getUserData)                         //Read
 router.put("/:id", userPut);                                    //Update
 router.delete("/:id", userDel);                                 //Delete
 
