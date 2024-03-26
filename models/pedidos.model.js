@@ -14,6 +14,10 @@ const PedidosSchema = Schema({
     producto: {
         type: String,
         required: [true, "Un pedido debe contener productos"]
+    },
+    state: {
+        type: Boolean,
+        default: true
     }
 })
 
