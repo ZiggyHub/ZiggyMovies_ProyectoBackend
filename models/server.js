@@ -11,6 +11,7 @@ class Server {
         this.port = process.env.PORT || 3005
         this.usersPath = "/db/users"
         this.servicePath = "/db/services"
+        this.pedidosPath = "/db/pedidos"
         this.dataBaseConnection()
         this.middlewares()
         this.routes()
@@ -30,6 +31,7 @@ class Server {
     routes(){
         this.app.use(this.usersPath, require('../routes/users.routes'), errors());
         this.app.use(this.servicePath, require('../routes/services.routes'));
+        this.app.use(this.pedidosPath, require('../routes/pedidos.routes'));
 
     }
 
