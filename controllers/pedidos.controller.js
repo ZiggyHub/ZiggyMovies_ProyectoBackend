@@ -40,12 +40,23 @@ const pedidosGet = asyncHandler(async (req, res) => {
     }
 })
 
+const getUserPedido = asyncHandler(async (req, res) => {
+    try {
+        res.json(req.pedido)
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al intentar tus pedidos",
+            error
+        })
+    }
+})
+
 const updatePedido = asyncHandler(async (req,res) => {
     const pedido = await Pedido.findById(req.params.id)
 
     if (!pedido) {
         res.status(404)
-            throw new Error('El error no fue encontrado')
+            throw new Error('El pedido no fue encontrado')
     } else {
         const updatedPedido = await Pedido.findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.status(200).json(updatedPedido)
@@ -55,5 +66,6 @@ const updatePedido = asyncHandler(async (req,res) => {
 module.exports = {
     pedidosPost,
     pedidosGet,
+    getUserPedido,
     updatePedido
 }

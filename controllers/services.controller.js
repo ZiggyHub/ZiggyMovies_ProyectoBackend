@@ -31,7 +31,7 @@ try {
     })
 
 }catch (error) {
-    rex.status(500).json({
+    res.status(500).json({
         message: 'Error en el servidor',
         error
     })

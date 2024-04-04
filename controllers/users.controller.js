@@ -83,7 +83,14 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const getUserData = asyncHandler(async (req, res) => {
-    res.json(req.user)
+    try {
+        res.json(req.user)
+    } catch (error) {
+        res.status(500).json({
+            message: "NO TE RINDAS",
+            error
+        })
+    }
 })
 
 const userPut = asyncHandler(async(req, res) => {

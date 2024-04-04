@@ -4,7 +4,7 @@ const { celebrateValidator } = require('../middlewares/celebrateValidator');
 
 const router = Router();
 
-router.post("/", celebrateValidator, servicePost);
+router.post("/", servicePost);
 router.get("/", serviceGet);
 router.put("/:id", servicePut);
 router.delete("/:id", serviceDel);
